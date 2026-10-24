@@ -7,12 +7,14 @@ export interface BirthInfo {
   name?: string;
   province?: string;   // 出生省份
   city?: string;       // 出生城市
-  longitude?: number;  // 出生地经度（用于真太阳时校正）
+  longitude?: number;  // 出生地经度（用于真太阳时校正）——配合 generateChart(birthInfo, { trueSolarTime: true }) 生效（经度差 + 均时差，见 lib/ziwei/true-solar-time.ts）；不传该开关时保持既有行为、不参与排盘
   /**
    * 原始输入（用户在表单里实际填的时间），已知出生时间时始终保留。
    * 例：用户输入 5/9 23:55 → year/month/day 会被改成 5/10（次日子时），
    *     而这里保存原始的 { year:Y, month:5, day:9, clockHour:23, clockMinute:55 }，
    *     用于在 chart 页让用户看见"已为你按子时换日规则归到次日"。
+   * generateChart(..., { trueSolarTime: true }) 时这里同时是真太阳时校正的原始钟表输入
+   * （hour 只是时辰支索引，无法还原钟表时刻），缺少 origInput 会显式抛错。
    */
   origInput?: {
     year: number;

@@ -10,6 +10,12 @@ import { BRANCHES, STEMS } from './constants';
 import { schoolStarBrightness, type BrightnessSchool } from './school-data';
 import { SCHOOL_AX } from './school-tables.generated';
 import { DEFAULT_LEAP_MONTH } from './school-config';
+import {
+  calculateTrueSolarTime,
+  isValidGregorianDate,
+  resolveZiweiDayOffset,
+  shiftGregorianDate,
+} from './true-solar-time';
 // 飞星派工具仅供导出，不再在排盘时调用（倪师《天纪 03》：四化星永远固定不动）
 // import { detectSelfSihua, getSiHuaByStem } from './sihua';
 
@@ -441,9 +447,57 @@ function applySchoolFuxun(palaces: Palace[]): void {
   pushNatalStar(palaces, fu, '副旬');
 }
 
+/**
+ * 真太阳时校正（opt-in，issue #45）：以 birthInfo.origInput 的原始钟表时间 +
+ * birthInfo.longitude 走 true-solar-time.ts 的完整口径（经度差 + NOAA 均时差），
+ * 再按晚子时换日规则（'next-day'，与 formToBirthInfo 的换日约定一致）推回排盘日与时辰支。
+ *
+ * BirthInfo.hour 只是时辰支索引（0-11），由它无法还原钟表时刻，因此原始时刻必须
+ * 由 origInput 提供。longitude / origInput 缺失时显式抛错、绝不静默降级——
+ * 文档写明「用于真太阳时校正」的字段不能像 #45 那样悄悄失效。
+ */
+function resolveTrueSolarChartTime(
+  birthInfo: BirthInfo,
+): { year: number; month: number; day: number; hour: number } {
+  const { longitude, origInput } = birthInfo;
+  if (typeof longitude !== 'number' || !Number.isFinite(longitude)) {
+    throw new RangeError(`trueSolarTime requires birthInfo.longitude; received ${longitude}`);
+  }
+  if (!origInput) {
+    throw new RangeError(
+      'trueSolarTime requires birthInfo.origInput (raw clock time); BirthInfo.hour is only a shichen branch index and cannot reconstruct the clock time',
+    );
+  }
+  const { year, month, day, clockHour, clockMinute } = origInput;
+  if (!isValidGregorianDate(year, month, day)) {
+    throw new RangeError(`solar date does not exist: ${year}-${month}-${day}`);
+  }
+  if (
+    !Number.isInteger(clockHour) || clockHour < 0 || clockHour > 23 ||
+    !Number.isInteger(clockMinute) || clockMinute < 0 || clockMinute > 59
+  ) {
+    throw new RangeError(
+      `origInput clock time must have hour 0-23 and minute 0-59; received ${clockHour}:${clockMinute}`,
+    );
+  }
+  const solar = calculateTrueSolarTime({ year, month, day, clockHour, clockMinute, longitude });
+  // 晚子时（真太阳时 23:00-24:00）按次日排盘；早子时（00:00-01:00）按本日——与 formToBirthInfo 一致
+  const shifted = shiftGregorianDate({ year, month, day }, resolveZiweiDayOffset(solar, 'next-day'));
+  return { year: shifted.year, month: shifted.month, day: shifted.day, hour: solar.branch };
+}
+
 export function generateChart(
   birthInfo: BirthInfo,
-  opts?: { leapMonth?: LunarMonthPolicy },
+  opts?: {
+    leapMonth?: LunarMonthPolicy;
+    /**
+     * 真太阳时校正开关（默认关闭 = 输出与旧版逐位一致，非破坏性变更）。
+     * 开启后用 birthInfo.longitude + birthInfo.origInput（原始钟表时间）走
+     * true-solar-time.ts 的完整口径（经度差 + 均时差）重推排盘日与时辰支，详见
+     * resolveTrueSolarChartTime。不传或 false 时 longitude 依旧不参与排盘（#45 修复前的既有行为）。
+     */
+    trueSolarTime?: boolean;
+  },
 ): ZiweiChart {
   const { year, month, day, hour, gender } = birthInfo;
   if (!Number.isInteger(hour) || hour < 0 || hour > 11) {
@@ -458,13 +512,19 @@ export function generateChart(
   ) {
     throw new RangeError(`solar date does not exist: ${year}-${month}-${day}`);
   }
+  // ── 真太阳时校正（opt-in，默认关闭，#45）──
+  // 默认（不传 / false）完全不走这条路：chartTime 就是原样输入，输出与旧版逐位一致。
+  // 开启后按 true-solar-time.ts 完整口径重推排盘日与时辰支，再进入下方同一管线。
+  const chartTime = opts?.trueSolarTime
+    ? resolveTrueSolarChartTime(birthInfo)
+    : { year, month, day, hour };
   const iztroGender = gender === 'male' ? '男' : '女';
 
   // 闰月处理（流派分歧：归本月 / 归下月 / 前后半分）
   // 默认 = DEFAULT_LEAP_MONTH（2026-09-05 起 split：主流排盘默认口径「月中分界」，150 组金标准盘对照验证；倪师派归下月可经流派抽屉切 next-month）
   // 非 split 时先算农历，闰月才切 byLunar；非闰月仍走 bySolar，与 split 行为完全一致
   const leapMode = opts?.leapMonth ?? DEFAULT_LEAP_MONTH;
-  const effectiveLunar = resolveEffectiveLunarDate(year, month, day, leapMode);
+  const effectiveLunar = resolveEffectiveLunarDate(chartTime.year, chartTime.month, chartTime.day, leapMode);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let astrolabe: any;
@@ -474,7 +534,7 @@ export function generateChart(
       const lunarDateStr = `${effectiveLunar.lunarYear}-${effectiveLunar.lunarMonth}-${effectiveLunar.lunarDay}`;
       astrolabe = astro.byLunar(
         lunarDateStr,
-        hour,
+        chartTime.hour,
         iztroGender,
         effectiveLunar.isLeapMonth,
         false,
@@ -482,12 +542,15 @@ export function generateChart(
       );
   } else {
     // 非闰月或 split 模式：直接 bySolar，保持 iztro 的既有行为
-    astrolabe = astro.bySolar(`${year}-${month}-${day}`, hour, iztroGender, true, 'zh-CN');
+    astrolabe = astro.bySolar(`${chartTime.year}-${chartTime.month}-${chartTime.day}`, chartTime.hour, iztroGender, true, 'zh-CN');
   }
 
   // 让序列化后的 chart.birthInfo 继续携带同一闰月策略，供客户端运限 helper 重建本命盘。
+  // 真太阳时校正开启时回填的是校正后的排盘日/时辰支（origInput 仍是原始钟表输入，
+  // 用同一 birthInfo 重建时不会二次校正），关闭时与输入逐位相同。
   const chartBirthInfo = {
     ...birthInfo,
+    ...chartTime,
     leapMonthPolicy: leapMode,
   } as BirthInfo & { leapMonthPolicy: LunarMonthPolicy };
 
@@ -578,7 +641,7 @@ export function generateChart(
     currentAge = horo.age.nominalAge;
   } catch {
     // fallback：iztro 接口异常时回退到虚岁推导
-    currentAge = new Date().getFullYear() - year + 1;
+    currentAge = new Date().getFullYear() - chartTime.year + 1;
   }
 
   palaces.forEach(p => {
@@ -631,7 +694,7 @@ export function generateChart(
   );
 
   // ── 农历信息（含节气四柱）──
-  const lunarInfo = getLunarInfo(year, month, day, hour, leapMode);
+  const lunarInfo = getLunarInfo(chartTime.year, chartTime.month, chartTime.day, chartTime.hour, leapMode);
 
   // ★ 2026-08-14 金标准盘核对：截空/副截阴干对调 + 年支大耗 + 旬空成对副旬
   applySchoolJiekong(palaces, lunarInfo.yearStem);
