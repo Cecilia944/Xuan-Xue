@@ -37,14 +37,19 @@ export function useHistory() {
     };
 
     setHistory(prev => {
-      // 去重：相同出生年月日+性别+时辰视为同一条记录
+      // 仅刷新同一人的完整输入；出生地和未知时刻会影响排盘。
       const deduped = prev.filter(e =>
         !(e.form.year === form.year &&
           e.form.month === form.month &&
           e.form.day === form.day &&
           e.form.gender === form.gender &&
           e.form.clockHour === form.clockHour &&
-          e.form.clockMinute === form.clockMinute)
+          e.form.clockMinute === form.clockMinute &&
+          e.form.unknownTime === form.unknownTime &&
+          e.form.longitude === form.longitude &&
+          e.form.province === form.province &&
+          e.form.city === form.city &&
+          e.form.name === form.name)
       );
       const updated = [entry, ...deduped].slice(0, MAX_ENTRIES);
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updated)); } catch {}
