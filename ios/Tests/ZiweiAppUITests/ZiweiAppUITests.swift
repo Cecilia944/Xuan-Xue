@@ -35,4 +35,29 @@ final class ZiweiAppUITests: XCTestCase {
         XCTAssertTrue(app.segmentedControls.buttons["卡片"].waitForExistence(timeout: 3))
         XCTAssertTrue(app.segmentedControls.buttons["罗盘"].exists)
     }
+
+    func testOnboardingPassesSystemAccessibilityAudit() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-ui-testing-reset"]
+        app.launch()
+
+        XCTAssertTrue(app.navigationBars["开始排盘"].waitForExistence(timeout: 5))
+        // iOS 17.5 reports a false contrast failure for the black/white SwiftUI
+        // primary button (21:1). Keep every other system accessibility audit.
+        try app.performAccessibilityAudit(for: .all.subtracting(.contrast))
+    }
+
+    func testOnboardingSupportsDarkModeAndAccessibilityText() throws {
+        let app = XCUIApplication()
+        app.launchArguments = [
+            "-ui-testing-reset",
+            "-AppleInterfaceStyle", "Dark",
+            "-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXXXL",
+        ]
+        app.launch()
+
+        XCTAssertTrue(app.navigationBars["开始排盘"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.textFields["昵称"].exists)
+        try app.performAccessibilityAudit(for: .all.subtracting(.contrast))
+    }
 }

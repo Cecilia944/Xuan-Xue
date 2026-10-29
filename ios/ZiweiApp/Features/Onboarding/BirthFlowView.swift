@@ -18,9 +18,17 @@ struct BirthFlowView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                ProgressView(value: Double(flow.step.rawValue + 1), total: 4)
-                    .padding(.horizontal)
-                    .accessibilityLabel("排盘进度，第 \(flow.step.rawValue + 1) 步，共 4 步")
+                VStack(spacing: 4) {
+                    ProgressView(value: Double(flow.step.rawValue + 1), total: 4)
+                        .accessibilityHidden(true)
+                    Text("第 \(flow.step.rawValue + 1) 步，共 4 步")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.vertical, 4)
+                }
+                .padding(.horizontal)
+                .frame(minHeight: 44)
                 Form {
                     content
                     if let issue = flow.issue {
@@ -132,7 +140,12 @@ struct BirthFlowView: View {
             Button(flow.step == .confirmation ? "生成命盘" : "继续") {
                 advance()
             }
-            .buttonStyle(.borderedProminent)
+            .font(.headline)
+            .foregroundStyle(.white)
+            .padding(.horizontal, 24)
+            .padding(.vertical, 14)
+            .background(.black, in: RoundedRectangle(cornerRadius: 14))
+            .buttonStyle(.plain)
         }
     }
 
