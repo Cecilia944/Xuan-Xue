@@ -42,6 +42,7 @@ public struct ZiweiChart: Codable, Equatable, Sendable {
     public let shenGongBranch: Int
     public let wuxingJu: Int
     public let wuxingJuName: String
+    public let ziweiPos: Int
     public let palaces: [ZiweiPalace]
 }
 
