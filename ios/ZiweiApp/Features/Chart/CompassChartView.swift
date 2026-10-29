@@ -58,7 +58,7 @@ struct CompassChartView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .accessibilityElement(children: .combine)
-        } else if ![6, 9, 10].contains(index) {
+        } else {
             Color.clear
         }
     }
