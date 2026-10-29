@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/.build/arm64-apple-macosx/debug/ZiweiCore.build/master.swiftdeps"
+  },
+  "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/Sources/ZiweiCore/AppNavigation.swift": {
+    "dependencies": "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/.build/arm64-apple-macosx/debug/ZiweiCore.build/AppNavigation.d",
+    "object": "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/.build/arm64-apple-macosx/debug/ZiweiCore.build/AppNavigation.swift.o",
+    "swiftmodule": "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/.build/arm64-apple-macosx/debug/ZiweiCore.build/AppNavigation~partial.swiftmodule",
+    "swift-dependencies": "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/.build/arm64-apple-macosx/debug/ZiweiCore.build/AppNavigation.swiftdeps"
+  },
+  "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/Sources/ZiweiCore/ZiweiCore.swift": {
+    "dependencies": "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/.build/arm64-apple-macosx/debug/ZiweiCore.build/ZiweiCore.d",
+    "object": "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/.build/arm64-apple-macosx/debug/ZiweiCore.build/ZiweiCore.swift.o",
+    "swiftmodule": "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/.build/arm64-apple-macosx/debug/ZiweiCore.build/ZiweiCore~partial.swiftmodule",
+    "swift-dependencies": "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/.build/arm64-apple-macosx/debug/ZiweiCore.build/ZiweiCore.swiftdeps"
+  }
+}

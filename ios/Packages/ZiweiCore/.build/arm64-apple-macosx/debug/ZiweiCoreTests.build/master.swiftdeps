@@ -1,0 +1,5 @@
+version: "Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)"
+options: "d5cf371e6c559107f844a9f815aa1cd9"
+build_time: [1793249747, 214897000]
+inputs:
+  "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/Tests/ZiweiCoreTests/AppLaunchTests.swift": [1793249649, 548308090]
