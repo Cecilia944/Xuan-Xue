@@ -1,4 +1,0 @@
-module ZiweiCore {
-    header "/Users/nik/Documents/ZhiWeiDouShu/.worktrees/ios-app/ios/Packages/ZiweiCore/.build/arm64-apple-macosx/debug/ZiweiCore.build/ZiweiCore-Swift.h"
-    requires objc
-}
