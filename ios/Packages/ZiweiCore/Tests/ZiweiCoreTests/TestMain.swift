@@ -9,6 +9,7 @@ enum TestMain {
         ChartMetadataTests.run()
         GoldenChartFixtureTests.run()
         ChartAuxiliaryStarTests.run()
+        BirthFlowTests.run()
         print("ZiweiCoreTests: \(TestSupport.total) passed")
     }
 }
