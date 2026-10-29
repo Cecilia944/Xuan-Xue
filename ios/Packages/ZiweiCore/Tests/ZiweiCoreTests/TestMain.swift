@@ -4,6 +4,7 @@ enum TestMain {
         AppLaunchTests.run()
         BirthDateValidatorTests.run()
         TrueSolarTimeTests.run()
+        ChartStructureTests.run()
         print("ZiweiCoreTests: \(TestSupport.total) passed")
     }
 }

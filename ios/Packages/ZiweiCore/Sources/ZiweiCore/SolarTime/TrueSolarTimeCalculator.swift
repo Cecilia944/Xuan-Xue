@@ -27,6 +27,15 @@ public struct ConfirmedBirthTime: Equatable, Sendable {
     public let hour: Int
     public let minute: Int
     public let branch: Int
+
+    public init(year: Int, month: Int, day: Int, hour: Int, minute: Int, branch: Int) {
+        self.year = year
+        self.month = month
+        self.day = day
+        self.hour = hour
+        self.minute = minute
+        self.branch = branch
+    }
 }
 
 public enum TrueSolarTimeCalculator {
