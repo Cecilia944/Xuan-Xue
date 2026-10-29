@@ -6,7 +6,12 @@ struct BirthFlowView: View {
     @EnvironmentObject private var appState: AppState
     @State private var name = ""
     @State private var gender: Gender = .female
+    @State private var birthCalendar: BirthCalendar = .gregorian
     @State private var birthDate = Calendar.current.date(from: DateComponents(year: 1990, month: 1, day: 1))!
+    @State private var lunarYear = 1990
+    @State private var lunarMonth = 1
+    @State private var lunarDay = 1
+    @State private var isLeapMonth = false
     @State private var birthTime = Calendar.current.date(from: DateComponents(hour: 12, minute: 0))!
     @State private var knowsTime = true
     @State private var unknownBranch = 6
@@ -65,7 +70,27 @@ struct BirthFlowView: View {
 
         case .birthData:
             Section("出生日期") {
-                DatePicker("公历生日", selection: $birthDate, in: dateRange, displayedComponents: .date)
+                Picker("历法", selection: $birthCalendar) {
+                    Text("公历").tag(BirthCalendar.gregorian)
+                    Text("农历").tag(BirthCalendar.lunar)
+                }
+                .pickerStyle(.segmented)
+                if birthCalendar == .gregorian {
+                    DatePicker("公历生日", selection: $birthDate, in: dateRange, displayedComponents: .date)
+                } else {
+                    LabeledContent("农历年份") {
+                        TextField("年份", value: $lunarYear, format: .number)
+                            .keyboardType(.numberPad)
+                            .multilineTextAlignment(.trailing)
+                    }
+                    Picker("农历月份", selection: $lunarMonth) {
+                        ForEach(1...12, id: \.self) { Text("\($0) 月").tag($0) }
+                    }
+                    Picker("农历日期", selection: $lunarDay) {
+                        ForEach(1...30, id: \.self) { Text("\($0) 日").tag($0) }
+                    }
+                    Toggle("闰月", isOn: $isLeapMonth)
+                }
                 Toggle("知道出生时间", isOn: $knowsTime)
                 if knowsTime {
                     DatePicker("钟表时间", selection: $birthTime, displayedComponents: .hourAndMinute)
@@ -117,7 +142,7 @@ struct BirthFlowView: View {
         case .confirmation:
             Section("确认资料") {
                 LabeledContent("昵称", value: name)
-                LabeledContent("日期", value: birthDate.formatted(date: .long, time: .omitted))
+                LabeledContent("日期", value: birthDateLabel)
                 LabeledContent("城市", value: city)
                 if let confirmed = flow.confirmedTime {
                     LabeledContent("采用时辰", value: branchNames[confirmed.branch] + "时")
@@ -180,11 +205,14 @@ struct BirthFlowView: View {
     private func makeProfile() -> BirthProfile {
         let dateParts = Calendar.current.dateComponents([.year, .month, .day], from: birthDate)
         let timeParts = Calendar.current.dateComponents([.hour, .minute], from: birthTime)
+        let date: BirthDate = birthCalendar == .gregorian
+            ? .gregorian(year: dateParts.year!, month: dateParts.month!, day: dateParts.day!)
+            : .lunar(year: lunarYear, month: lunarMonth, day: lunarDay, isLeapMonth: isLeapMonth)
         return BirthProfile(
             id: flow.profile.id,
             name: name,
             gender: gender,
-            date: .gregorian(year: dateParts.year!, month: dateParts.month!, day: dateParts.day!),
+            date: date,
             time: knowsTime ? .exact(hour: timeParts.hour!, minute: timeParts.minute!) : .unknown,
             location: BirthLocation(city: city, longitude: longitude, utcOffsetMinutes: utcOffsetMinutes)
         )
@@ -213,6 +241,13 @@ struct BirthFlowView: View {
     private var dateRange: ClosedRange<Date> {
         Calendar.current.date(from: DateComponents(year: 1900, month: 1, day: 1))! ...
         Calendar.current.date(from: DateComponents(year: 2050, month: 12, day: 31))!
+    }
+
+    private var birthDateLabel: String {
+        if birthCalendar == .gregorian {
+            return birthDate.formatted(date: .long, time: .omitted)
+        }
+        return "农历 \(lunarYear) 年\(isLeapMonth ? "闰" : "")\(lunarMonth) 月 \(lunarDay) 日"
     }
 
     private let branchNames = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]

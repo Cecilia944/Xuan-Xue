@@ -8,7 +8,8 @@ enum BirthFlowTests {
         requiresBranchWhenBirthTimeIsUnknown()
         requiresExplicitConfirmationForCrossedTimeBoundary()
         keepsConfirmationVisibleWhenChartGenerationFails()
-        TestSupport.record(16, suite: "BirthFlowTests")
+        acceptsLunarExactTimeAndGeneratesChart()
+        TestSupport.record(19, suite: "BirthFlowTests")
     }
 
     private static func movesForwardAndBackAcrossFourSteps() {
@@ -74,6 +75,22 @@ enum BirthFlowTests {
         TestSupport.equal(flow.generateDraft(), nil, "generation failure produces no draft")
         TestSupport.equal(flow.step, .confirmation, "generation failure stays on confirmation")
         TestSupport.equal(flow.issue, .chartGenerationFailed, "generation failure is explained")
+    }
+
+    private static func acceptsLunarExactTimeAndGeneratesChart() {
+        let profile = BirthProfile(
+            name: "农历样例",
+            gender: .male,
+            date: .lunar(year: 1990, month: 1, day: 1, isLeapMonth: false),
+            time: .exact(hour: 12, minute: 0),
+            location: BirthLocation(city: "北京", longitude: 116.4, utcOffsetMinutes: 480)
+        )
+        var flow = BirthFlowModel(profile: profile)
+        _ = flow.advance()
+        TestSupport.equal(flow.advance(), true, "valid lunar birth data advances")
+        flow.confirmTimeCorrection()
+        TestSupport.equal(flow.advance(), true, "lunar correction reaches confirmation")
+        TestSupport.equal(flow.generateDraft() == nil, false, "lunar profile generates chart")
     }
 
     private static func validProfile() -> BirthProfile {

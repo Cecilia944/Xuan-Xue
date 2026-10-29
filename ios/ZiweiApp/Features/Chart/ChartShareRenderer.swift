@@ -63,3 +63,43 @@ struct ActivityShareSheet: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
+
+struct ChartShareOptionsView: View {
+    let record: ChartRecord
+    @Environment(\.dismiss) private var dismiss
+    @State private var includeNickname = false
+    @State private var shareImage: UIImage?
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section("隐私选项") {
+                    Toggle("在图片中显示昵称", isOn: $includeNickname)
+                    Label("精确分钟、城市和经纬度始终隐藏", systemImage: "hand.raised.fill")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                Section {
+                    Button("生成并分享") {
+                        shareImage = ChartShareRenderer.render(
+                            record: record,
+                            privacy: SharePrivacyOptions(includeNickname: includeNickname)
+                        )
+                    }
+                }
+            }
+            .navigationTitle("分享命盘")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) { Button("取消") { dismiss() } }
+            }
+            .sheet(isPresented: sharePresented) {
+                if let shareImage { ActivityShareSheet(items: [shareImage]) }
+            }
+        }
+    }
+
+    private var sharePresented: Binding<Bool> {
+        Binding(get: { shareImage != nil }, set: { if !$0 { shareImage = nil } })
+    }
+}

@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit
 import ZiweiCore
 
 struct ChartHomeView: View {
@@ -20,7 +19,7 @@ struct ChartHomeView: View {
 private struct ChartContent: View {
     let record: ChartRecord
     @State private var model: ChartPresentationModel
-    @State private var shareImage: UIImage?
+    @State private var shareOptionsPresented = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
@@ -56,16 +55,14 @@ private struct ChartContent: View {
         .animation(reduceMotion ? nil : .snappy, value: model.selection?.branch)
         .toolbar {
             Button {
-                shareImage = ChartShareRenderer.render(record: record)
+                shareOptionsPresented = true
             } label: {
                 Label("分享脱敏命盘", systemImage: "square.and.arrow.up")
             }
         }
-        .sheet(isPresented: sharePresented) {
-            if let shareImage {
-                ActivityShareSheet(items: [shareImage])
-                    .presentationDetents([.medium, .large])
-            }
+        .sheet(isPresented: $shareOptionsPresented) {
+            ChartShareOptionsView(record: record)
+                .presentationDetents([.medium, .large])
         }
     }
 
@@ -101,10 +98,4 @@ private struct ChartContent: View {
         horizontalSizeClass == .regular || verticalSizeClass == .compact
     }
 
-    private var sharePresented: Binding<Bool> {
-        Binding(
-            get: { shareImage != nil },
-            set: { if !$0 { shareImage = nil } }
-        )
-    }
 }

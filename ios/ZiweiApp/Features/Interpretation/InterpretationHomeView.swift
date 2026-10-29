@@ -1,4 +1,5 @@
 import SwiftUI
+import Foundation
 import ZiweiCore
 
 struct InterpretationHomeView: View {
@@ -24,8 +25,23 @@ struct InterpretationHomeView: View {
                             }
                         }
                         Section("当前运势") {
-                            Label("当前大限摘要", systemImage: "clock.arrow.circlepath")
-                            Label("当前流年摘要", systemImage: "calendar")
+                            let cycle = cycleSummary(for: record)
+                            NavigationLink {
+                                CurrentCycleDetailView(summary: cycle)
+                            } label: {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Label("当前大限 · \(cycle.decadePalaceName)", systemImage: "clock.arrow.circlepath")
+                                    Text(cycle.decadeText).font(.caption).foregroundStyle(.secondary).lineLimit(2)
+                                }
+                            }
+                            NavigationLink {
+                                CurrentCycleDetailView(summary: cycle)
+                            } label: {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Label("\(cycle.currentYear) \(cycle.yearGanzhi)流年", systemImage: "calendar")
+                                    Text(cycle.yearText).font(.caption).foregroundStyle(.secondary).lineLimit(2)
+                                }
+                            }
                         }
                         Section("Pro 深度能力") {
                             proRow(.deepReport)
@@ -70,6 +86,31 @@ struct InterpretationHomeView: View {
             get: { requestedFeature != nil },
             set: { if !$0 { requestedFeature = nil } }
         )
+    }
+
+    private func cycleSummary(for record: ChartRecord) -> CurrentCycleSummary {
+        let birthYear: Int
+        switch record.profile.date {
+        case let .gregorian(year, _, _), let .lunar(year, _, _, _): birthYear = year
+        }
+        return CurrentCycleSummaryEngine.generate(
+            chart: record.chart,
+            birthYear: birthYear,
+            currentYear: Calendar.current.component(.year, from: .now)
+        )
+    }
+}
+
+private struct CurrentCycleDetailView: View {
+    let summary: CurrentCycleSummary
+
+    var body: some View {
+        List {
+            Section("当前大限") { Text(summary.decadeText) }
+            Section("\(summary.currentYear) · \(summary.yearGanzhi)流年") { Text(summary.yearText) }
+            Section { Text(summary.caveat).font(.footnote).foregroundStyle(.secondary) }
+        }
+        .navigationTitle("运限摘要")
     }
 }
 

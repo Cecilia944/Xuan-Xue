@@ -63,7 +63,7 @@ public struct BirthFlowModel {
             }
             if case .exact = profile.time {
                 do {
-                    correctionProposal = try TrueSolarTimeCalculator.calculate(profile)
+                    correctionProposal = try TrueSolarTimeCalculator.calculate(correctionProfile())
                 } catch {
                     issue = .timeCorrectionFailed
                     return false
@@ -154,10 +154,10 @@ public struct BirthFlowModel {
     }
 
     private func confirmedTime(from proposal: TimeCorrectionProposal) -> ConfirmedBirthTime? {
-        guard case let .gregorian(year, month, day) = profile.date else { return nil }
+        guard let source = gregorianDate() else { return nil }
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!
-        guard let date = calendar.date(from: DateComponents(year: year, month: month, day: day)),
+        guard let date = calendar.date(from: DateComponents(year: source.year, month: source.month, day: source.day)),
               let adjusted = calendar.date(byAdding: .day, value: proposal.dayOffset, to: date)
         else { return nil }
         let parts = calendar.dateComponents([.year, .month, .day], from: adjusted)
@@ -175,18 +175,35 @@ public struct BirthFlowModel {
     }
 
     private func representativeTime(for branch: Int) -> ConfirmedBirthTime? {
-        let components: (Int, Int, Int)
-        switch profile.date {
-        case let .gregorian(year, month, day), let .lunar(year, month, day, _):
-            components = (year, month, day)
-        }
+        guard let date = gregorianDate() else { return nil }
         return ConfirmedBirthTime(
-            year: components.0,
-            month: components.1,
-            day: components.2,
+            year: date.year,
+            month: date.month,
+            day: date.day,
             hour: branch == 0 ? 0 : branch * 2,
             minute: 0,
             branch: branch
         )
+    }
+
+    private func correctionProfile() throws -> BirthProfile {
+        guard let date = gregorianDate() else { throw TimeCorrectionError.invalidDate }
+        var converted = profile
+        converted.date = .gregorian(year: date.year, month: date.month, day: date.day)
+        return converted
+    }
+
+    private func gregorianDate() -> GregorianDate? {
+        switch profile.date {
+        case let .gregorian(year, month, day):
+            return GregorianDate(year: year, month: month, day: day)
+        case let .lunar(year, month, day, isLeapMonth):
+            return LunarCalendarConverter.toGregorian(
+                year: year,
+                month: month,
+                day: day,
+                isLeapMonth: isLeapMonth
+            )
+        }
     }
 }
