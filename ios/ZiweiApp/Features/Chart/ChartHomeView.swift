@@ -22,6 +22,8 @@ private struct ChartContent: View {
     @State private var model: ChartPresentationModel
     @State private var shareImage: UIImage?
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
 
     init(record: ChartRecord) {
         self.record = record
@@ -37,18 +39,17 @@ private struct ChartContent: View {
             .pickerStyle(.segmented)
             .padding(.horizontal)
 
-            Group {
-                switch model.displayMode {
-                case .card:
-                    CardChartView(model: $model)
-                case .compass:
-                    CompassChartView(model: $model)
+            if usesSplitLayout {
+                HStack(alignment: .top, spacing: 0) {
+                    chartBody
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    Divider()
+                    detailBody
+                        .frame(width: 340, alignment: .top)
                 }
-            }
-
-            if let palace = model.selectedPalace {
-                PalaceDetailView(palace: palace)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            } else {
+                chartBody
+                detailBody
             }
         }
         .navigationTitle(record.profile.name + "的命盘")
@@ -70,6 +71,34 @@ private struct ChartContent: View {
 
     private var modeBinding: Binding<ChartDisplayMode> {
         Binding(get: { model.displayMode }, set: { model.setDisplayMode($0) })
+    }
+
+    @ViewBuilder
+    private var chartBody: some View {
+        switch model.displayMode {
+        case .card:
+            CardChartView(model: $model)
+        case .compass:
+            CompassChartView(model: $model)
+        }
+    }
+
+    @ViewBuilder
+    private var detailBody: some View {
+        if let palace = model.selectedPalace {
+            PalaceDetailView(palace: palace)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+        } else if usesSplitLayout {
+            ContentUnavailableView(
+                "选择一个宫位",
+                systemImage: "hand.tap",
+                description: Text("查看星曜、四化和三方四正")
+            )
+        }
+    }
+
+    private var usesSplitLayout: Bool {
+        horizontalSizeClass == .regular || verticalSizeClass == .compact
     }
 
     private var sharePresented: Binding<Bool> {
