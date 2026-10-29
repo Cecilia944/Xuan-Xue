@@ -2,7 +2,7 @@ import Foundation
 
 public let FreeProfileLimit = 3
 
-public struct ChartRecord: Equatable, Sendable {
+public struct ChartRecord: Codable, Equatable, Sendable {
     public let id: UUID
     public var profile: BirthProfile
     public let confirmedTime: ConfirmedBirthTime

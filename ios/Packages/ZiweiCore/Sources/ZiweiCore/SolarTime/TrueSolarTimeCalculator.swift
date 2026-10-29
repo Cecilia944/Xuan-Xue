@@ -20,7 +20,7 @@ public struct TimeCorrectionProposal: Equatable, Sendable {
     public let requiresConfirmation: Bool
 }
 
-public struct ConfirmedBirthTime: Equatable, Sendable {
+public struct ConfirmedBirthTime: Codable, Equatable, Sendable {
     public let year: Int
     public let month: Int
     public let day: Int

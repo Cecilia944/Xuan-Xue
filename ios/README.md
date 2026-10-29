@@ -27,7 +27,19 @@ swift run --package-path ios/Packages/ZiweiCore ZiweiCoreTests
 npm test
 ```
 
-完整 SwiftUI、SwiftData、StoreKit 2、图片渲染、VoiceOver 和设备布局验收需要完整 Xcode。安装后还需创建/生成 iOS 17+ App target，将 `ZiweiCore` 作为本地 Swift Package 引入，并把隐私清单加入 target resources。
+完整 SwiftUI、SwiftData、StoreKit 2、图片渲染、VoiceOver 和设备布局验收需要完整 Xcode。仓库已提供 `ios/project.yml`，安装 XcodeGen 后可生成工程：
+
+```sh
+brew install xcodegen
+cd ios
+xcodegen generate
+open ZiweiApp.xcodeproj
+```
+
+生成的 iOS 17+ App target 会自动引入本地 `ZiweiCore`、SwiftData 模型和隐私清单。运行购买流程前，请在 App Store Connect 或 StoreKit Configuration 中建立以下订阅产品：
+
+- `com.ziwei.app.pro.monthly`
+- `com.ziwei.app.pro.yearly`
 
 ## 来源与许可
 
