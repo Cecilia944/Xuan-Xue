@@ -7,10 +7,12 @@ struct RootView: View {
     @Environment(\.modelContext) private var modelContext
 
     var body: some View {
-        if appState.records.isEmpty || appState.isCreatingRecord {
-            BirthFlowView()
-        } else {
-            MainTabView()
+        Group {
+            if appState.records.isEmpty || appState.isCreatingRecord {
+                BirthFlowView()
+            } else {
+                MainTabView()
+            }
         }
         .task {
             appState.configure(modelContext: modelContext)

@@ -58,6 +58,10 @@ final class AppState: ObservableObject {
         guard !hasLoadedPersistentRecords else { return }
         hasLoadedPersistentRecords = true
         self.modelContext = modelContext
+        if CommandLine.arguments.contains("-ui-testing-reset") {
+            for stored in storedRecords() { modelContext.delete(stored) }
+            try? modelContext.save()
+        }
         let decoder = JSONDecoder()
         records = storedRecords().compactMap { try? decoder.decode(ChartRecord.self, from: $0.payload) }
         selectedRecordID = records.first?.id

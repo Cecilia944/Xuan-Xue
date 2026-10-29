@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		002B938974F0693B7EE5DFCC /* BirthFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E53443D4F2516190F8D46B /* BirthFlowView.swift */; };
+		0E6D9D37D6B16F9DF5470B52 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4279F38B3FA712D267525245 /* TodayView.swift */; };
+		1BFCD16D1FB25B17C2C9A789 /* ProPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7481F29C4F3ED096D3BA1A73 /* ProPaywallView.swift */; };
+		3133816AE696FFB728AC9F6D /* ZiweiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2834D6A7D3FE4BDBF03434F7 /* ZiweiApp.swift */; };
+		3136D95E61207DF2250604AB /* StoredChartRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399182C7AF25EE164AA7378D /* StoredChartRecord.swift */; };
+		551DB23C2D2D5AF3AD78FF08 /* InterpretationHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676A96C53A52CEF737EB2501 /* InterpretationHomeView.swift */; };
+		60A1CFF8440F93803E681483 /* SettingsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD6CC5668A2061E7CF2F9E1 /* SettingsHomeView.swift */; };
+		610CB55249A81AF94E089A37 /* CompassChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D8E8CA3F99728CDDD51440 /* CompassChartView.swift */; };
+		66BB2296E4C584EADA82D0C1 /* PalaceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E57D251D972A9C9A56F63C5 /* PalaceDetailView.swift */; };
+		68953B9C4B984DFB3EC9E043 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70DDA6918BA442342649F8 /* AppState.swift */; };
+		6CB47D1CAADAA53E334B0B87 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A4EF2FBB49E96B42B838D8 /* PurchaseManager.swift */; };
+		71C086FE4FF736665267B448 /* CardChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2226CFC15BA317FB4E735295 /* CardChartView.swift */; };
+		93DBD32D9036314A97C4EFA1 /* ProfileListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4B99C30DC13A4345F3234B /* ProfileListView.swift */; };
+		AD22644C5F299E8E28961CD2 /* ZiweiAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC0504E459D4F11AC9A025A /* ZiweiAppUITests.swift */; };
+		AFD6699C5B93EEC2963BA789 /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74F9C188019A409EABDBB3B /* LearnView.swift */; };
+		BE4754AEA3394C375687F086 /* ChartHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8C6A2C7038F26AD4AB64C2 /* ChartHomeView.swift */; };
+		C27963F39F4E4382F9888051 /* ZiweiCore in Frameworks */ = {isa = PBXBuildFile; productRef = 57E40F18748973E6CDE2A911 /* ZiweiCore */; };
+		D8EAB5FCF2B50E15C0E63BB2 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A142B7CE8AA271084A4B40 /* RootView.swift */; };
+		FB8D461973497634E87222D4 /* ChartShareRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E0D357D13A6E8465684F2 /* ChartShareRenderer.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		906A1D19221684C1737ACE12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1D14F697FF1F2009DC03DBC5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 95924237E928EC2FEE67B50E;
+			remoteInfo = ZiweiApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1E57D251D972A9C9A56F63C5 /* PalaceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalaceDetailView.swift; sourceTree = "<group>"; };
+		2226CFC15BA317FB4E735295 /* CardChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardChartView.swift; sourceTree = "<group>"; };
+		2834D6A7D3FE4BDBF03434F7 /* ZiweiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZiweiApp.swift; sourceTree = "<group>"; };
+		29A4EF2FBB49E96B42B838D8 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		2F4B99C30DC13A4345F3234B /* ProfileListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListView.swift; sourceTree = "<group>"; };
+		2F70DDA6918BA442342649F8 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		399182C7AF25EE164AA7378D /* StoredChartRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredChartRecord.swift; sourceTree = "<group>"; };
+		3D2CB818DA888B342308E426 /* ZiweiApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ZiweiApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4279F38B3FA712D267525245 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		43E53443D4F2516190F8D46B /* BirthFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthFlowView.swift; sourceTree = "<group>"; };
+		45A142B7CE8AA271084A4B40 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		5CD6CC5668A2061E7CF2F9E1 /* SettingsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHomeView.swift; sourceTree = "<group>"; };
+		5F2E0D357D13A6E8465684F2 /* ChartShareRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartShareRenderer.swift; sourceTree = "<group>"; };
+		676A96C53A52CEF737EB2501 /* InterpretationHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpretationHomeView.swift; sourceTree = "<group>"; };
+		6C8C6A2C7038F26AD4AB64C2 /* ChartHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHomeView.swift; sourceTree = "<group>"; };
+		7481F29C4F3ED096D3BA1A73 /* ProPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProPaywallView.swift; sourceTree = "<group>"; };
+		93D8E8CA3F99728CDDD51440 /* CompassChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassChartView.swift; sourceTree = "<group>"; };
+		ACD39F6331C3E47E7B9E3C17 /* ZiweiAppUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ZiweiAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF8CC2D5F6A28D22D69EF1B9 /* ZiweiCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ZiweiCore; path = Packages/ZiweiCore; sourceTree = SOURCE_ROOT; };
+		C74F9C188019A409EABDBB3B /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
+		CFC0504E459D4F11AC9A025A /* ZiweiAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZiweiAppUITests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5D8C6FC16DD424BA62B78C04 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C27963F39F4E4382F9888051 /* ZiweiCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1D1674413B72F16B78B4748A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E147D2EBD8A2DD81C061B6A5 /* ZiweiAppUITests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		31ABAE2EE7B748EA35ACA8A6 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				2226CFC15BA317FB4E735295 /* CardChartView.swift */,
+				6C8C6A2C7038F26AD4AB64C2 /* ChartHomeView.swift */,
+				5F2E0D357D13A6E8465684F2 /* ChartShareRenderer.swift */,
+				93D8E8CA3F99728CDDD51440 /* CompassChartView.swift */,
+				1E57D251D972A9C9A56F63C5 /* PalaceDetailView.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		3C8EDF1DFBDC2CFFE0C1E7A2 /* Interpretation */ = {
+			isa = PBXGroup;
+			children = (
+				676A96C53A52CEF737EB2501 /* InterpretationHomeView.swift */,
+				7481F29C4F3ED096D3BA1A73 /* ProPaywallView.swift */,
+			);
+			path = Interpretation;
+			sourceTree = "<group>";
+		};
+		909D8FF6B5D6BF8498FA8E06 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				31ABAE2EE7B748EA35ACA8A6 /* Chart */,
+				3C8EDF1DFBDC2CFFE0C1E7A2 /* Interpretation */,
+				94F154CF41CBDB8F350A6DE5 /* Learn */,
+				CEED0DDEFE867E519CCF7FBE /* Onboarding */,
+				BC6190877C092F34A0EC80E8 /* Profile */,
+				D2520F85D5E0648BA76EE40A /* Settings */,
+				D4F798599B0CD85FCC97E562 /* Today */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		94F154CF41CBDB8F350A6DE5 /* Learn */ = {
+			isa = PBXGroup;
+			children = (
+				C74F9C188019A409EABDBB3B /* LearnView.swift */,
+			);
+			path = Learn;
+			sourceTree = "<group>";
+		};
+		9512335513591AEDC8898C79 /* ZiweiApp */ = {
+			isa = PBXGroup;
+			children = (
+				EE795450202F10BDA28A4892 /* App */,
+				909D8FF6B5D6BF8498FA8E06 /* Features */,
+			);
+			path = ZiweiApp;
+			sourceTree = "<group>";
+		};
+		B006B897B196B69F2815AD07 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				BF8CC2D5F6A28D22D69EF1B9 /* ZiweiCore */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		BC6190877C092F34A0EC80E8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2F4B99C30DC13A4345F3234B /* ProfileListView.swift */,
+				399182C7AF25EE164AA7378D /* StoredChartRecord.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		C1F3A075F9578D85F01486DA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3D2CB818DA888B342308E426 /* ZiweiApp.app */,
+				ACD39F6331C3E47E7B9E3C17 /* ZiweiAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEED0DDEFE867E519CCF7FBE /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				43E53443D4F2516190F8D46B /* BirthFlowView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		D2520F85D5E0648BA76EE40A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5CD6CC5668A2061E7CF2F9E1 /* SettingsHomeView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		D4F798599B0CD85FCC97E562 /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				4279F38B3FA712D267525245 /* TodayView.swift */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
+		E147D2EBD8A2DD81C061B6A5 /* ZiweiAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CFC0504E459D4F11AC9A025A /* ZiweiAppUITests.swift */,
+			);
+			path = ZiweiAppUITests;
+			sourceTree = "<group>";
+		};
+		EC587B430C5EE40281160B05 = {
+			isa = PBXGroup;
+			children = (
+				B006B897B196B69F2815AD07 /* Packages */,
+				1D1674413B72F16B78B4748A /* Tests */,
+				9512335513591AEDC8898C79 /* ZiweiApp */,
+				C1F3A075F9578D85F01486DA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EE795450202F10BDA28A4892 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2F70DDA6918BA442342649F8 /* AppState.swift */,
+				29A4EF2FBB49E96B42B838D8 /* PurchaseManager.swift */,
+				45A142B7CE8AA271084A4B40 /* RootView.swift */,
+				2834D6A7D3FE4BDBF03434F7 /* ZiweiApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1958C52E1E6A68E7A142AAF6 /* ZiweiAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C5D2F285660FAE2EFBC44BAC /* Build configuration list for PBXNativeTarget "ZiweiAppUITests" */;
+			buildPhases = (
+				925F4CD2FFD031C80B75D4C6 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96957BE0F0F2B8D86683846C /* PBXTargetDependency */,
+			);
+			name = ZiweiAppUITests;
+			packageProductDependencies = (
+			);
+			productName = ZiweiAppUITests;
+			productReference = ACD39F6331C3E47E7B9E3C17 /* ZiweiAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		95924237E928EC2FEE67B50E /* ZiweiApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 458B71D7979A363A84FA4D00 /* Build configuration list for PBXNativeTarget "ZiweiApp" */;
+			buildPhases = (
+				F323B36E90BBCEBD50F55482 /* Sources */,
+				5D8C6FC16DD424BA62B78C04 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZiweiApp;
+			packageProductDependencies = (
+				57E40F18748973E6CDE2A911 /* ZiweiCore */,
+			);
+			productName = ZiweiApp;
+			productReference = 3D2CB818DA888B342308E426 /* ZiweiApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1D14F697FF1F2009DC03DBC5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					1958C52E1E6A68E7A142AAF6 = {
+						DevelopmentTeam = "";
+						TestTargetID = 95924237E928EC2FEE67B50E;
+					};
+					95924237E928EC2FEE67B50E = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = 74DCB658679110D4E7AD5DC2 /* Build configuration list for PBXProject "ZiweiApp" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EC587B430C5EE40281160B05;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E25546CAA43DF63D9A786F22 /* XCLocalSwiftPackageReference "Packages/ZiweiCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C1F3A075F9578D85F01486DA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				95924237E928EC2FEE67B50E /* ZiweiApp */,
+				1958C52E1E6A68E7A142AAF6 /* ZiweiAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		925F4CD2FFD031C80B75D4C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD22644C5F299E8E28961CD2 /* ZiweiAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F323B36E90BBCEBD50F55482 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68953B9C4B984DFB3EC9E043 /* AppState.swift in Sources */,
+				002B938974F0693B7EE5DFCC /* BirthFlowView.swift in Sources */,
+				71C086FE4FF736665267B448 /* CardChartView.swift in Sources */,
+				BE4754AEA3394C375687F086 /* ChartHomeView.swift in Sources */,
+				FB8D461973497634E87222D4 /* ChartShareRenderer.swift in Sources */,
+				610CB55249A81AF94E089A37 /* CompassChartView.swift in Sources */,
+				551DB23C2D2D5AF3AD78FF08 /* InterpretationHomeView.swift in Sources */,
+				AFD6699C5B93EEC2963BA789 /* LearnView.swift in Sources */,
+				66BB2296E4C584EADA82D0C1 /* PalaceDetailView.swift in Sources */,
+				1BFCD16D1FB25B17C2C9A789 /* ProPaywallView.swift in Sources */,
+				93DBD32D9036314A97C4EFA1 /* ProfileListView.swift in Sources */,
+				6CB47D1CAADAA53E334B0B87 /* PurchaseManager.swift in Sources */,
+				D8EAB5FCF2B50E15C0E63BB2 /* RootView.swift in Sources */,
+				60A1CFF8440F93803E681483 /* SettingsHomeView.swift in Sources */,
+				3136D95E61207DF2250604AB /* StoredChartRecord.swift in Sources */,
+				0E6D9D37D6B16F9DF5470B52 /* TodayView.swift in Sources */,
+				3133816AE696FFB728AC9F6D /* ZiweiApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		96957BE0F0F2B8D86683846C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 95924237E928EC2FEE67B50E /* ZiweiApp */;
+			targetProxy = 906A1D19221684C1737ACE12 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		198099863A1AB0AE1ED451FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "紫微斗数";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ziwei.app;
+				PRODUCT_NAME = "紫微斗数";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1B59695CBD97CB66DF05D6E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "紫微斗数";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ziwei.app;
+				PRODUCT_NAME = "紫微斗数";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		805B3E4E106F316E6A91A05F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ziwei.app.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ZiweiApp;
+			};
+			name = Debug;
+		};
+		ABAFF709A1B91A9B09BD98F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Release;
+		};
+		D5C84EF8339EA5ED0AFECBEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ziwei.app.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ZiweiApp;
+			};
+			name = Release;
+		};
+		F3610FF39983EEF5534521DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.10;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		458B71D7979A363A84FA4D00 /* Build configuration list for PBXNativeTarget "ZiweiApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B59695CBD97CB66DF05D6E5 /* Debug */,
+				198099863A1AB0AE1ED451FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		74DCB658679110D4E7AD5DC2 /* Build configuration list for PBXProject "ZiweiApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3610FF39983EEF5534521DB /* Debug */,
+				ABAFF709A1B91A9B09BD98F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C5D2F285660FAE2EFBC44BAC /* Build configuration list for PBXNativeTarget "ZiweiAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				805B3E4E106F316E6A91A05F /* Debug */,
+				D5C84EF8339EA5ED0AFECBEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		E25546CAA43DF63D9A786F22 /* XCLocalSwiftPackageReference "Packages/ZiweiCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/ZiweiCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		57E40F18748973E6CDE2A911 /* ZiweiCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ZiweiCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 1D14F697FF1F2009DC03DBC5 /* Project object */;
+}
