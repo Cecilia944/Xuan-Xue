@@ -12,6 +12,7 @@ enum TestMain {
         BirthFlowTests.run()
         ChartPresentationTests.run()
         EntitlementTests.run()
+        ChartRepositoryTests.run()
         print("ZiweiCoreTests: \(TestSupport.total) passed")
     }
 }
