@@ -12,7 +12,8 @@ let package = Package(
         .executableTarget(
             name: "ZiweiCoreTests",
             dependencies: ["ZiweiCore"],
-            path: "Tests/ZiweiCoreTests"
+            path: "Tests/ZiweiCoreTests",
+            resources: [.copy("Fixtures")]
         ),
     ]
 )

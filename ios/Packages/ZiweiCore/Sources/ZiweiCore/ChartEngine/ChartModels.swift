@@ -21,6 +21,7 @@ public struct ZiweiPalace: Codable, Equatable, Sendable {
     public let stem: Int
     public let name: String
     public var majorStars: [ZiweiStar]
+    public var auxiliaryStars: [ZiweiStar] = []
     public let isMingGong: Bool
     public let isShenGong: Bool
     public var daXianAge: AgeRange? = nil
@@ -65,11 +66,45 @@ public struct ZiweiChart: Codable, Equatable, Sendable {
 public struct ZiweiChartRequest: Sendable {
     public let profile: BirthProfile
     public let confirmedTime: ConfirmedBirthTime
+    public let schoolConfiguration: SchoolConfiguration
 
-    public init(profile: BirthProfile, confirmedTime: ConfirmedBirthTime) {
+    public init(
+        profile: BirthProfile,
+        confirmedTime: ConfirmedBirthTime,
+        schoolConfiguration: SchoolConfiguration = .default
+    ) {
         self.profile = profile
         self.confirmedTime = confirmedTime
+        self.schoolConfiguration = schoolConfiguration
     }
+}
+
+public enum BrightnessSchool: String, Codable, Sendable {
+    case quanshu
+}
+
+public enum LateZiShiRule: String, Codable, Sendable {
+    case nextDay
+    case currentDay
+}
+
+public enum LeapMonthPolicy: String, Codable, Sendable {
+    case split
+    case nextMonth
+    case previousMonth
+    case originalMonth
+}
+
+public struct SchoolConfiguration: Codable, Equatable, Sendable {
+    public let brightnessSchool: BrightnessSchool
+    public let lateZiShiRule: LateZiShiRule
+    public let leapMonthPolicy: LeapMonthPolicy
+
+    public static let `default` = SchoolConfiguration(
+        brightnessSchool: .quanshu,
+        lateZiShiRule: .nextDay,
+        leapMonthPolicy: .split
+    )
 }
 
 public enum ZiweiChartError: Error, Equatable {

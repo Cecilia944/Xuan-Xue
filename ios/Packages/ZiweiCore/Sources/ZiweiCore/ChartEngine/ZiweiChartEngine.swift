@@ -15,6 +15,13 @@ public enum ZiweiChartEngine {
         var palaces = buildPalaces(ming: ming, shen: shen, yearStem: lunar.yearStem)
         let ju = wuxingJu(stem: palaces.first(where: { $0.branch == ming })!.stem, branch: ming)
         let ziweiPos = placeMajorStars(in: &palaces, lunarDay: lunar.day, bureau: ju, yearStem: lunar.yearStem)
+        placeAuxiliaryStars(
+            in: &palaces,
+            lunarMonth: lunar.month,
+            hourBranch: time.branch,
+            yearStem: lunar.yearStem,
+            yearBranch: lunar.yearBranch
+        )
         applyDecades(in: &palaces, ming: ming, bureau: ju, yearStem: lunar.yearStem, gender: request.profile.gender)
         applyBorrowedPalaces(in: &palaces)
         let names = [2: "水二局", 3: "木三局", 4: "金四局", 5: "土五局", 6: "火六局"]
@@ -140,9 +147,67 @@ public enum ZiweiChartEngine {
             [0,2,1,5,4,1,7,2,1,5,4,1,7], [0,2,6,1,1,7,2,2,6,1,1,7,2],
             [0,1,1,1,7,3,3,1,3,1,7,3,3], [0,1,2,1,1,1,3,1,2,7,3,1,7],
             [0,2,1,1,2,1,5,2,1,1,2,1,5], [0,1,2,3,7,2,5,1,2,3,7,2,5],
+            [0,3,1,7,4,3,1,7,4,3,1,7,4], [0,3,1,5,2,3,1,7,2,3,1,7,2],
+            [0,2,1,1,7,1,5,2,1,5,7,1,6], [0,1,1,2,7,1,5,2,1,6,7,1,5],
+            [0,2,2,0,1,0,0,1,0,0,0,0,2], [0,0,0,2,0,0,2,0,2,1,1,0,0],
+            [0,1,0,1,1,0,1,1,0,1,1,0,1], [0,0,0,2,0,0,5,0,0,2,0,0,5],
+            [0,7,3,1,4,7,3,1,4,7,3,1,4], [0,7,3,1,4,7,3,1,4,7,3,1,4],
+            [0,7,1,0,7,1,0,7,1,0,7,1,0], [0,0,1,7,0,1,7,0,1,7,0,1,7],
+            [0,5,7,7,5,7,1,1,5,1,1,7,7], [0,7,7,5,5,7,6,1,5,1,5,5,7],
         ]
         let value = table[starID][branch + 1]
         return [1: .miao, 2: .wang, 3: .de, 4: .li, 5: .ping, 6: .bu, 7: .luo][value]
+    }
+
+    private static func placeAuxiliaryStars(
+        in palaces: inout [ZiweiPalace],
+        lunarMonth: Int,
+        hourBranch: Int,
+        yearStem: Int,
+        yearBranch: Int
+    ) {
+        let kuiYue = [
+            (1,7), (0,8), (11,9), (11,9), (1,7),
+            (0,8), (1,7), (2,6), (3,5), (3,5),
+        ][yearStem]
+        let lu = [2,3,5,6,5,6,8,9,11,0][yearStem]
+        let ma: Int
+        switch yearBranch {
+        case 2,6,10: ma = 8
+        case 8,0,4: ma = 2
+        case 5,9,1: ma = 11
+        default: ma = 5
+        }
+        let bases: (Int, Int)
+        switch yearBranch {
+        case 2,6,10: bases = (1,3)
+        case 8,0,4: bases = (2,10)
+        case 5,9,1: bases = (3,10)
+        default: bases = (9,10)
+        }
+        let stars: [(Int, String, Int)] = [
+            (15, "文昌", modulo(10 - hourBranch, 12)),
+            (16, "文曲", modulo(4 + hourBranch, 12)),
+            (17, "左辅", modulo(3 + lunarMonth, 12)),
+            (18, "右弼", modulo(11 - lunarMonth, 12)),
+            (19, "天魁", kuiYue.0), (20, "天钺", kuiYue.1),
+            (21, "禄存", lu), (22, "天马", ma),
+            (25, "擎羊", modulo(lu + 1, 12)), (26, "陀罗", modulo(lu - 1, 12)),
+            (23, "火星", modulo(bases.0 + hourBranch, 12)),
+            (24, "铃星", modulo(bases.1 + hourBranch, 12)),
+            (27, "地空", modulo(11 - hourBranch, 12)),
+            (28, "地劫", modulo(11 + hourBranch, 12)),
+        ]
+        let transformations = siHuaByStarID[yearStem]
+        for (id, name, branch) in stars {
+            palaces[branch].auxiliaryStars.append(
+                ZiweiStar(
+                    name: name,
+                    brightness: brightness(starID: id, branch: branch),
+                    siHua: transformations.first(where: { $0.value == id })?.key
+                )
+            )
+        }
     }
 
     private static func applyDecades(

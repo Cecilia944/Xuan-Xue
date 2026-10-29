@@ -2,6 +2,7 @@ import ZiweiCore
 
 enum ChartMajorStarTests {
     static func run() {
+        TestSupport.equal(request((1990, 6, 15, 6, .male, 4)).schoolConfiguration.brightnessSchool, .quanshu, "defaults to Quanshu brightness school")
         let fixtures: [(Int, Int, Int, Int, Gender, Int)] = [
             (1990, 6, 15, 6, .male, 4),
             (1988, 4, 10, 0, .female, 1),
@@ -31,7 +32,7 @@ enum ChartMajorStarTests {
         TestSupport.equal(star("天同", in: chart).siHua, .ji, "applies Geng-year obstacle transformation")
         TestSupport.equal(star("武曲", in: chart).brightness, .wang, "uses Quanshu brightness table")
         TestSupport.equal(star("太阳", in: chart).brightness, .bu, "keeps weak brightness distinction")
-        TestSupport.record(28, suite: "ChartMajorStarTests")
+        TestSupport.record(29, suite: "ChartMajorStarTests")
     }
 
     private static func request(_ value: (Int, Int, Int, Int, Gender, Int)) -> ZiweiChartRequest {
