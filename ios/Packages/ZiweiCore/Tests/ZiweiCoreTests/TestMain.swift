@@ -6,6 +6,7 @@ enum TestMain {
         TrueSolarTimeTests.run()
         ChartStructureTests.run()
         ChartMajorStarTests.run()
+        ChartMetadataTests.run()
         print("ZiweiCoreTests: \(TestSupport.total) passed")
     }
 }

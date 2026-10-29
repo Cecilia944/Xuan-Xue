@@ -23,8 +23,21 @@ public struct ZiweiPalace: Codable, Equatable, Sendable {
     public var majorStars: [ZiweiStar]
     public let isMingGong: Bool
     public let isShenGong: Bool
+    public var daXianAge: AgeRange? = nil
+    public var borrowedFromBranch: Int? = nil
+    public var borrowedMajorStars: [String] = []
     public var isEmpty: Bool { majorStars.isEmpty }
     public var oppositeBranch: Int { (branch + 6) % 12 }
+}
+
+public struct AgeRange: Codable, Equatable, Sendable {
+    public let start: Int
+    public let end: Int
+
+    public init(start: Int, end: Int) {
+        self.start = start
+        self.end = end
+    }
 }
 
 public struct ZiweiLunarInfo: Codable, Equatable, Sendable {
@@ -43,6 +56,9 @@ public struct ZiweiChart: Codable, Equatable, Sendable {
     public let wuxingJu: Int
     public let wuxingJuName: String
     public let ziweiPos: Int
+    public let mingZhu: String
+    public let shenZhu: String
+    public let yinYangGender: String
     public let palaces: [ZiweiPalace]
 }
 

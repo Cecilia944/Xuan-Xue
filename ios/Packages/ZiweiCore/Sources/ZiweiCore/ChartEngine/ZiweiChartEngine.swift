@@ -15,7 +15,13 @@ public enum ZiweiChartEngine {
         var palaces = buildPalaces(ming: ming, shen: shen, yearStem: lunar.yearStem)
         let ju = wuxingJu(stem: palaces.first(where: { $0.branch == ming })!.stem, branch: ming)
         let ziweiPos = placeMajorStars(in: &palaces, lunarDay: lunar.day, bureau: ju, yearStem: lunar.yearStem)
+        applyDecades(in: &palaces, ming: ming, bureau: ju, yearStem: lunar.yearStem, gender: request.profile.gender)
+        applyBorrowedPalaces(in: &palaces)
         let names = [2: "水二局", 3: "木三局", 4: "金四局", 5: "土五局", 6: "火六局"]
+        let mingZhuNames = ["贪狼", "巨门", "禄存", "文曲", "廉贞", "武曲", "破军", "武曲", "廉贞", "文曲", "禄存", "巨门"]
+        let shenZhuNames = ["火星", "天相", "天梁", "天同", "文昌", "天机", "火星", "天相", "天梁", "天同", "文昌", "天机"]
+        let yinYang = lunar.yearStem.isMultiple(of: 2) ? "阳" : "阴"
+        let genderName = request.profile.gender == .male ? "男" : "女"
 
         return ZiweiChart(
             lunarInfo: lunar,
@@ -24,6 +30,9 @@ public enum ZiweiChartEngine {
             wuxingJu: ju,
             wuxingJuName: names[ju]!,
             ziweiPos: ziweiPos,
+            mingZhu: mingZhuNames[ming],
+            shenZhu: shenZhuNames[lunar.yearBranch],
+            yinYangGender: yinYang + genderName,
             palaces: palaces
         )
     }
@@ -134,6 +143,32 @@ public enum ZiweiChartEngine {
         ]
         let value = table[starID][branch + 1]
         return [1: .miao, 2: .wang, 3: .de, 4: .li, 5: .ping, 6: .bu, 7: .luo][value]
+    }
+
+    private static func applyDecades(
+        in palaces: inout [ZiweiPalace],
+        ming: Int,
+        bureau: Int,
+        yearStem: Int,
+        gender: Gender
+    ) {
+        let isYang = yearStem.isMultiple(of: 2)
+        let forward = (isYang && gender == .male) || (!isYang && gender == .female)
+        for index in palaces.indices {
+            let distance = forward
+                ? modulo(palaces[index].branch - ming, 12)
+                : modulo(ming - palaces[index].branch, 12)
+            let start = bureau + distance * 10
+            palaces[index].daXianAge = AgeRange(start: start, end: start + 9)
+        }
+    }
+
+    private static func applyBorrowedPalaces(in palaces: inout [ZiweiPalace]) {
+        for index in palaces.indices where palaces[index].majorStars.isEmpty {
+            let opposite = palaces[index].oppositeBranch
+            palaces[index].borrowedFromBranch = opposite
+            palaces[index].borrowedMajorStars = palaces[opposite].majorStars.map(\.name)
+        }
     }
 
     private static func modulo(_ value: Int, _ base: Int) -> Int {
