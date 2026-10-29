@@ -3,6 +3,7 @@ enum TestMain {
     static func main() {
         AppLaunchTests.run()
         BirthDateValidatorTests.run()
+        TrueSolarTimeTests.run()
         print("ZiweiCoreTests: \(TestSupport.total) passed")
     }
 }
